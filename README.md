@@ -1,7 +1,7 @@
 # Raspberry-Pi
 All Raspberry Pi Backups, Commands, Instructions for domian.network Servers
 
-## Access Windows Shared drive on Linux (smb:// drive)
+# Access Windows Shared drive on Linux (smb:// drive)
 ### Reference: 
 https://www.maketecheasier.com/mount-windows-share-folder-linux/
 ### Use Case:
