@@ -26,10 +26,53 @@ This should prompt you for a "ghosted" password. Enter the password for the ```u
 
 5. Windows drive should now be accessible on Linux at ```/mnt/WindowsSharedFolder```.
 
-#### All CMD Commands:
+#### All bash commands for file share:
 ```bash
 cd 
 sudo apt install cifs-utils
 sudo mkdir /mnt/WindowsSharedFolder
 mount.cifs //192.168.1.1/c$/inetpub/wwwroot/SharedFolderNameOnWindows /mnt/WindowsSharedFolder -o user=<admin user>
+```
+
+# Bluetooth connect Keyboard and Mouse to Raspberry Pi via CLI
+### Reference: https://www.cnet.com/tech/computing/how-to-setup-bluetooth-on-a-raspberry-pi-3/
+### Should work for factory Raspian OS installed. Others are untested.
+
+#### Steps & Commands:
+1. In terminal, change directory into "home" folder for user.
+```bash
+cd
+```
+2. Run the following to start bluetooth services.
+```bash
+sudo bluetoothctl
+```
+3. Turn on the bluetooth agent for detection.
+```bash
+agent on
+```
+4. Turn scanning on...
+```bash
+scan on
+```
+5. Look through list for MAC address and/or names of bluetooth devices you want to connect. Take note of MAC address, and "pair" by typing in "pair" followed by the devices MAC address.
+```bash
+pair XX:XX:XX:XX:XX:XX
+```
+6. If you're pairing a keyboard, you will need to enter a six-digit string of numbers. You will see that the device has been paired, but it may not have connected. To connect the device, type connect XX:XX:XX:XX:XX:XX.
+```bash
+connect XX:XX:XX:XX:XX:XX
+```
+
+#### All bash commands for bluetooth -- Personal MAC addresses for Keychron K4 (Bluetooth Input 3) and MX Master 3 (Bluetooth Input 3) below:
+```bash
+cd
+echo This is for Keychron K4 and MX Master 3 using bluetooth input "3" on both devices.
+sudo bluetoothctl
+agent on
+scan on
+echo Pairing Keychron K4 (Bluetooth Input 3)
+pair dc:2c:26:d4:f8:2b
+echo Pairing MX Master 3 (Bluetooth Input 3)
+pair c1:6c:7e:13:63:d5
 ```
