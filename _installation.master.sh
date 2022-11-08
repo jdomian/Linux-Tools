@@ -1,7 +1,13 @@
 #!/bin/bash
 
-# To install, ssh into your device, and type the following (without the # of course)
+# To install, ssh into your device, and type the following (without the # of course).
 # curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/_installation.master.sh --output _installation.master.sh
+# chmod +x _installation.master.sh
+# sudo ./_installation.master.sh
+# OR
+# Create a new file called _installation.master.sh and copy & paste this whole thing.
+# Then run:
+# chmod +x _installation.master.sh
 # sudo ./_installation.master.sh
 
 # Colors for console prompts and feedback when running script.
@@ -19,7 +25,7 @@ purple_bold_prefix="\033[1;35m"
 
 all_suffix="\033[00m"
 
-echo ""
+echo $'\n'
 PS3="Hi there! This is going to setup a bunch of stuff I use all the time! It may take a while, and along the way, I'm going to ask you a bunch of questions... and I want them answered IMMEDIATLEY! ":
 initSetup=("OK, sure!" "No way Jośe!" "...like what kind of stuff?" "Quit")
 select stuff in "${initSetup[@]}"; do
@@ -29,12 +35,19 @@ select stuff in "${initSetup[@]}"; do
             ;;
         "No way Jośe!")
             insult="Well, well... you haven't connected this thing to the internet yet... no pirate insults for you then..."
+            echo $'\n'
             curl https://pirate.monkeyness.com/api/insult || echo "$insult"
+            echo $'\n'
             echo "See ya!"
-	          break
+            echo $'\n'
+	        break
             ;;
         "...like what kind of stuff?")
-            echo "All kinds of awesome stuff, like NodeJS, Node Package Manager (NPM), NVM (Node Version Manager), Python, C++, Chrome Browser... all the web technologies I use as a Software Engineer but for physical devices... Sound Good? Trust me on this... ;)"
+            echo $'\n'
+            echo "All kinds of awesome stuff..."
+            echo "like NodeJS, Node Package Manager (NPM),NVM (Node Version Manager), Python, C++, Chrome Browser..."
+            echo "all the web technologies I use as a Software Engineer but for physical devices... Sound Good? Trust me on this... ;)"
+            echo $'\n'
             ;;
 	    "Quit")
 	        echo "User requested exit"
