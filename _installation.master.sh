@@ -15,84 +15,27 @@ purple_bold_prefix="\033[1;35m"
 
 all_suffix="\033[00m"
 
-echo -e "$red_bold_prefix"Enabling camera module..."$all_suffix"
-
-# Check if the camera is enabled. 1 = disabled, 0 = enabled.
-# sudo raspi-config nonint get_camera
-
-# Enable the camera
-echo -e "$green_prefix"Enabling camera module..."$all_suffix"
-sudo raspi-config nonint do_camera 0 -y
-
-# Check if i2c is enabled. 1 = disabled, 0 = enabled.
-# sudo raspi-config nonint get_i2c
-
-# Enable i2c
-echo -e "$green_prefix"Enabling i2c..."$all_suffix"
-sudo raspi-config nonint do_i2c 0 -y
-
-# Update Raspberry Pi OS
-echo -e "$green_prefix"Updating Raspberry Pi OS..."$all_suffix"
-sudo apt-get update -y
-
-# Upgrade all libraries
-echo -e "$green_prefix"Upgrading Raspberry Pi OS dependencies..."$all_suffix"
-sudo apt-get upgrade -y
-
-# Install additional like python3 for NodeJS & NPM build tools.
-echo -e "$green_prefix"Installing g++..."$all_suffix"
-sudo apt-get install g++ -y
-
-echo -e "$green_prefix"Installing gcc..."$all_suffix"
-sudo apt-get install gcc -y
-
-echo -e "$green_prefix"Installing c++ make..."$all_suffix"
-sudo apt-get install make -y
-
-echo -e "$green_prefix"Installing build-essential..."$all_suffix"
-sudo apt install build-essential -y
-
-# Install GIT
-echo -e "$green_prefix"Installing GIT..."$all_suffix"
-sudo apt-get install git -y 
-
-# Install Python3-pip... this one takes a while
-echo -e "$green_prefix"Installing Python 3..."$all_suffix"
-sudo apt-get install python3 -y
-sudo apt-get install python3-pip -y
-sudo apt-get install libfontconfig -y
-
-# Install i2c-tools
-echo -e "$green_prefix"Installing i2c-tools..."$all_suffix"
-sudo apt-get install i2c-tools -y
-
-# Update again
-echo -e "$green_prefix"Running update again..."$all_suffix"
-sudo apt-get update -y
-
-# Add the repository for the latest version of NodeJS
-echo -e "$green_prefix"Downloading NodeJS Setup..."$all_suffix"
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash
-
-# Install NodeJS now that it is added to the repository list.
-echo -e "$green_prefix"Installing NodeJS..."$all_suffix"
-sudo apt-get install nodejs -y
-
-# Install Node Version Manager (Just in case)
-# Use: 
-# $ nvm install 16
-# $ nvm use 16
-echo -e "$green_prefix"Installing NVM - Node Version Manager..."$all_suffix"
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
-
-echo -e "$green_prefix"Configuring NVM..."$all_suffix"
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-echo -e "$green_prefix"Updating NPM to latest major version..."$all_suffix"
-sudo npm install -g npm@latest
-
-# Install Gulp globally with sudo for development
-echo -e "$green_prefix"Installing GulpJS CLI globally..."$all_suffix"
-sudo npm install --global gulp-cli
+echo ""
+PS3="Hi there! This is going to setup a bunch of stuff I use all the time! It may take a while, and along the way, I'm going to ask you a bunch of questions... and I want them answered IMMEDIATLEY! ":
+initSetup=("OK, sure!" "No way Jośe!" "...like what kind of stuff?" "Quit")
+select stuff in "${initSetup[@]}"; do
+    case $stuff in
+        "OK, sure!")
+            echo "Awesome! Let's get crackin'!"
+            ;;
+        "No way Jośe!")
+            insult="Well, well... you haven't connected this thing to the internet yet... no pirate insults for you then..."
+            curl https://pirate.monkeyness.com/api/insult || echo "$insult"
+            echo "See ya!"
+	          break
+            ;;
+        "...like what kind of stuff?")
+            echo "All kinds of awesome stuff, like NodeJS, Node Package Manager (NPM), NVM (Node Version Manager), Python, C++, Chrome Browser... all the web technologies I use as a Software Engineer but for physical devices... Sound Good? Trust me on this... ;)"
+            ;;
+	    "Quit")
+	        echo "User requested exit"
+	        exit
+	        ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
