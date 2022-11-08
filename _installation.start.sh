@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # To install, ssh into your device, and type the following (without the # of course).
-# curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/_installation.master.sh --output _installation.master.sh
-# chmod +x _installation.master.sh
-# sudo ./_installation.master.sh
+# curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/_installation.start.sh --output _installation.start.sh
+# chmod +x _installation.start.sh
+# sudo ./_installation.start.sh
 # OR
-# Create a new file called _installation.master.sh and copy & paste this whole thing.
+# Create a new file called _installation.start.sh and copy & paste this whole thing.
 # Then run:
-# chmod +x _installation.master.sh
-# sudo ./_installation.master.sh
+# chmod +x _installation.start.sh
+# sudo ./_installation.start.sh
 
 # Colors for console prompts and feedback when running script.
 red_prefix="\033[31m"
