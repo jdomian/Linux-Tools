@@ -15,6 +15,43 @@ purple_bold_prefix="\033[1;35m"
 
 all_suffix="\033[00m"
 
+PS3="Anything else you want to install or setup while I am in here?":
+initSetup=("MFSB" "MFSB-Hyperpixel2r" "NodeJS Express Web Server" "Kiosk Mode (Includes NodeJS Express Web Server)")
+select stuff in "${initSetup[@]}"; do
+    case $stuff in
+        "MFSB")
+            echo "green_bold_prefix"Mutha F*****\' Space Blaster!"all_suffix"
+            echo "This is the OG MFSB v2 attachment for the Rivalburn."
+            curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/mfsb.setup.sh --output mfsb.setup.sh
+            chmod +x mfsb.setup.sh
+            sudo ./mfsb.setup.sh
+            break
+            ;;
+        "MFSB-Hyperpixel2r")
+            echo "green_bold_prefix"Mutha F*****\' Space Blaster -- HYPERPIXEL 2.1 Round!"all_suffix"
+            echo "This is the v3 of the MFSB attachment, designed for all blaster with picatinny rails and a round touchscreen display with custom operating system."
+            curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/mfsb-hyperpixel2r.setup.sh --output mfsb-hyperpixel2r.setup.sh
+            chmod +x mfsb-hyperpixel2r.setup.sh
+            sudo ./mfsb-hyperpixel2r.setup.sh
+            break
+            ;;
+        "Kiosk Mode (Includes NodeJS Express Web Server)")
+            echo "green_bold_prefix"NodeJS Basic Web Server"all_suffix"
+            echo "Headless web server for all your hosting needs! Super handy for quick stuff."
+            curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/node-server.setup.sh --output mfsb-hyperpixel2r.setup.sh
+            chmod +x mfsb-hyperpixel2r.setup.sh
+            sudo ./mfsb-hyperpixel2r.setup.sh
+            break
+            ;;
+	    "Quit")
+	        echo "User requested exit"
+	        exit
+	        ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
+
+
 # Check if the camera is enabled. 1 = disabled, 0 = enabled.
 # sudo raspi-config nonint get_camera
 
