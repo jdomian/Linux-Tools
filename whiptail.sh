@@ -21,21 +21,20 @@ all_suffix="\033[00m"
 
 echo -e ""
 sleep 0.2
-echo -e "Netrunner initalized... executing"
+echo -e "$cyan_prefix"Netrunner initalized... executing"$all_suffix"
 sleep 0.2
-echo -e "Executing installation screen"
+echo -e "$green_prefix"Executing installation screen"$all_suffix"
 sleep 0.2
-echo -e "...standby"
+echo -e "$yellow_prefix"...standby"$all_suffix"
 sleep 0.1
-echo -e "."
+echo -e "$yellow_prefix"."$all_suffix"
 sleep 0.1
-echo -e "."
+echo -e "$yellow_prefix"."$all_suffix"
 sleep 0.1
-echo -e "."
+echo -e "$yellow_prefix"."$all_suffix"
 sleep 0.1
-echo -e "."
-sleep 0.1
-echo -e "."
+echo -e "$yellow_prefix"."$all_suffix"
+sleep 0.25
 
 function execInstall() {
 
@@ -74,7 +73,7 @@ roottext=brightcyan,black
 '
 
 OPTION=$(
-whiptail --title "Netrunner Interfaces -- (jdomian)" \
+whiptail --title "Netrunner::Interface -- (jdomian)" \
 --backtitle "Hostname:$(hostname); IPv4:$(hostname -I)--- $(date +"%F") => $(date +'%T')" \
 --menu "\nSelect an interface to install..." 25 100 10 \
 	"1" "GulpJS Boilerplate Site"   \
@@ -115,5 +114,11 @@ if [ $exitstatus = 0 ]; then
         echo "Your chosen option:" $OPTION
     fi
 else
-    echo "You chose Cancel."
+    echo -e "$yellow_prefix"Terminating connection..."$all_suffix"
+    sleep 1
+    echo -e "$red_bold_prefix"☠~FLATLINED"$all_suffix"
+    sleep 3
+    echo -e "$red_bold_prefix"_WIPING TRACE_"$all_suffix"
+    sleep 0.2
+    clear                                                                                                                                               
 fi
