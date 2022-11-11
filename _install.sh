@@ -13,6 +13,8 @@
 # chmod +x _install.sh
 # sudo ./_install.sh
 yellow_bold_prefix='\033[1;33m'
+red_bold_prefix='\033[1;31m'
+green_bold_prefix='\033[1;32m'
 all_suffix='\033[00m'
 whiptailStart='_whiptail.start.sh'
 
@@ -48,10 +50,10 @@ if [ ! -f '$whiptailStart' ]; then
 	whiptailStart='_whiptail.start.sh'
 	echo 'Creating custom commands...'
 	createCustomCommands
-	echo 'source ~/_commands.sh'
+	source _commands.sh
 	echo 'Good to go!'
-	echo 'To start the menu , type '$yellow_bold_prefix'_start'$all_suffix' or '$yellow_bold_prefix'start'$all_suffix' in terminal...'
-	read -p 'Press ENTER to launch or Ctrl+C to exit.'
-	start
-	sudo rm _install.sh
+	echo -e 'To start the menu , type '$yellow_bold_prefix'_start'$all_suffix' or '$yellow_bold_prefix'start'$all_suffix' in terminal...'
+	echo -e 'Press '$green_bold_prefix'ENTER'$all_suffix' to launch or '$red_bold_prefix'Ctrl+C'$all_suffix' to exit.'
+	read -p ''
+	sudo ./_whiptail.start.sh
 fi
