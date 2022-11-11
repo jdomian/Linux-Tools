@@ -56,7 +56,7 @@ function execInstall() {
     echo -e "$yellow_prefix"Install of "$all_suffix""$cyan_bold_prefix"$1"$all_suffix" "$yellow_prefix"complete..."$all_suffix" reloading Installation/Execute.
     sleep 3
     cd
-    ./whiptail.sh
+    _start
 }
 
 export NEWT_COLORS='
