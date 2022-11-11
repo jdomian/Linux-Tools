@@ -22,6 +22,7 @@ function getWhipped() {
 	curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/_whiptail.start.sh --output _whiptail.start.sh
 	chmod +x _whiptail.start.sh
 	whiptailStart='_whiptail.start.sh'
+	sudo cp _whiptail.start.sh /root/_whiptail.start.sh
 }
 
 function createCustomCommands() {
