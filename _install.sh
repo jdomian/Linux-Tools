@@ -55,5 +55,6 @@ if [ ! -f '$whiptailStart' ]; then
 	echo -e 'To start the menu , type '$yellow_bold_prefix'_start'$all_suffix' or '$yellow_bold_prefix'start'$all_suffix' in terminal...'
 	echo -e 'Press '$green_bold_prefix'ENTER'$all_suffix' to launch or '$red_bold_prefix'Ctrl+C'$all_suffix' to exit.'
 	read -p ''
+	sudo rm _install.sh
 	sudo ./_whiptail.start.sh
 fi
