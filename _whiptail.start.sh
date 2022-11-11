@@ -56,7 +56,7 @@ function execInstall() {
     echo -e "$yellow_prefix"Install of "$all_suffix""$cyan_bold_prefix"$1"$all_suffix" "$yellow_prefix"complete..."$all_suffix" reloading Installation/Execute.
     sleep 3
     cd
-    ./whiptail.sh
+    start
 }
 
 export NEWT_COLORS='
@@ -73,7 +73,7 @@ roottext=brightcyan,black
 '
 
 OPTION=$(
-whiptail --title "Netrunner::Interface -- (jdomian)" \
+whiptail --title "START::Netrunner Interface -- (jdomian)" \
 --backtitle "Hostname:$(hostname); IPv4:$(hostname -I)--- $(date +"%F") => $(date +'%T')" \
 --menu "\nSelect an interface to install..." 25 100 10 \
 	"1" "GulpJS Boilerplate Site"   \
