@@ -53,10 +53,3 @@ if [ ! -f '$whiptailStart' ]; then
 	read -n 1 -s -r -p 'Press any key to launch start'
 	sudo rm _install.sh
 fi
-	
-	
-	
-	
-
-
-
