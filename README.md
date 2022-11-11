@@ -1,6 +1,14 @@
 # Raspberry-Pi
 All Raspberry Pi Backups, Commands, Instructions for domian.network Servers
 
+## To Install tools:
+Copy and past the following into terminal to run and install whiptail menu.
+```bash
+curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/_install.sh --output _install.sh
+chmod +x _install.sh
+sudo ./_install.sh
+```
+
 # Access Windows Shared drive on Linux (smb:// drive)
 ### Reference: 
 https://www.maketecheasier.com/mount-windows-share-folder-linux/
