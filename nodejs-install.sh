@@ -57,4 +57,12 @@ export NVM_DIR='$HOME/.nvm'
 echo -e '$green_prefix'Updating NPM to latest major version...'$all_suffix'
 sudo npm install -g npm@latest
 
+echo -e '$green_prefix'Check versions'$all_suffix'
+
+node -v
+npm -v
+nvm -v
+
+sleep 2
+
 echo -e '$green_prefix'Completing install...'$all_suffix'
