@@ -1,4 +1,5 @@
 #!/bin/bash
+
 black_prefix='\033[30m'
 red_prefix='\033[31m'
 green_prefix='\033[32m'
@@ -19,7 +20,7 @@ white_bold_prefix='\033[1;37m'
 
 all_suffix='\033[00m'
 
-echo -e 'Preparing to install '$green_bold_prefix'NodeJS, NPM and NVM'$all_suffix'...'
+echo -e 'Preparing to install '$green_bold_prefix'NodeJS, NPM and NVM'$all_suffix'
 
 # Update Raspberry Pi OS
 echo -e '$green_prefix'Updating Raspberry Pi OS...'$all_suffix'
