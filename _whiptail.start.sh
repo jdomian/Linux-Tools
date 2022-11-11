@@ -91,9 +91,9 @@ whiptail --title "_start::Netrunner::Interface -- (jdomian)" \
 exitstatus=$?
 if [ $exitstatus = 0 ]; then
     if [ $OPTION = 1 ]; then
-        execInstall gulpjs.boilerplate.sh
+        execInstall gulpjs-boilerplate.sh
     elif [ $OPTION = 2 ]; then
-        execInstall nodejs.install.sh
+        execInstall nodejs-install.sh
     elif [ $OPTION = 3 ]; then
         execInstall nodejs-express-server.sh
     elif [ $OPTION = 4 ]; then
