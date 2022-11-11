@@ -56,7 +56,7 @@ function execInstall() {
     echo -e "$yellow_prefix"Install of "$all_suffix""$cyan_bold_prefix"$1"$all_suffix" "$yellow_prefix"complete..."$all_suffix" reloading Installation/Execute.
     sleep 3
     cd
-    start
+    ./whiptail.sh
 }
 
 export NEWT_COLORS='
@@ -73,7 +73,7 @@ roottext=brightcyan,black
 '
 
 OPTION=$(
-whiptail --title "START::Netrunner Interface -- (jdomian)" \
+whiptail --title "_start::Netrunner::Interface -- (jdomian)" \
 --backtitle "Hostname:$(hostname); IPv4:$(hostname -I)--- $(date +"%F") => $(date +'%T')" \
 --menu "\nSelect an interface to install..." 25 100 10 \
 	"1" "GulpJS Boilerplate Site"   \
@@ -82,9 +82,9 @@ whiptail --title "START::Netrunner Interface -- (jdomian)" \
 	"4" "Chromium Kiosk Mode" \
 	"5" "MFSB-hyperpixel2r" \
 	"6" "MFSB (Rivalburn/v2)" \
-    "7" "Map a Windows (SMB) Drive to Linux" \
-    "8" "Turing Pi 2 Admin" \
-    "9" "Reboot" \
+    	"7" "Map a Windows (SMB) Drive to Linux" \
+    	"8" "Turing Pi 2 Admin" \
+    	"9" "Reboot" \
 	"10" "Quit"  3>&2 2>&1 1>&3	
 )
 
@@ -117,8 +117,7 @@ else
     echo -e "$yellow_prefix"Terminating connection..."$all_suffix"
     sleep 1
     echo -e "$red_bold_prefix"☠~FLATLINED"$all_suffix"
-    sleep 3
+    sleep 2
     echo -e "$red_bold_prefix"_WIPING TRACE_"$all_suffix"
-    sleep 0.2
-    clear                                                                                                                                               
+    sleep 0.2                                                                                                                                            
 fi
