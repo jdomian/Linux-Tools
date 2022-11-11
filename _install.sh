@@ -48,8 +48,10 @@ if [ ! -f '$whiptailStart' ]; then
 	whiptailStart='_whiptail.start.sh'
 	echo 'Creating custom commands...'
 	createCustomCommands
+	source ~/_commands.sh
 	echo 'Good to go!'
 	echo 'To start the menu , type 'yellow_bold_prefix'_start'all_suffix' or 'yellow_bold_prefix'start'all_suffix' in terminal...'
-	read -n 1 -s -r -p 'Press any key to launch start'
+	read -p 'Press ENTER to launch or Ctrl+C to exit.'
+	start
 	sudo rm _install.sh
 fi
