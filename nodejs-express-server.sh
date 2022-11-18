@@ -124,12 +124,12 @@ function install() {
         if (whiptail --yesno "There is a file that already exist as port.js. This will change the port to $1. Do you want to change the port?" 8 25 --title "port.js DETECTED!" 3>&1 1>&2 2>&3) then
             # Yes
             rm port.js
-            createPortJS $1
+            createConfigJS $1
         else
             echo "Skipping port change..."
         fi
     else
-        createPortJS $1
+        createConfigJS $1
     fi
 
     # Create /public directory and /public/css amd /public/js directories for web files.
@@ -178,8 +178,9 @@ function install() {
     cd
     cd node-server
     # Install NodeJS NPM dependencies
+    sudo npm init -y
     sudo npm install
-    sudo npm install -g express
+    sudo npm install express
 
     if [ $2 = "Yes" ]; then
         createStartOnBoot $1 $2
@@ -204,12 +205,21 @@ function createServerJS() {
     echo "const os = require('os');" | sudo tee -a $serverJS
     echo "const interfaces = os.networkInterfaces();" | sudo tee -a $serverJS
     echo "const serverIP = interfaces;" | sudo tee -a $serverJS
-    echo "const port = require('./port.js');" | sudo tee -a $serverJS
+    echo "const config = require('./config');" | sudo tee -a $serverJS
+    echo "const port = config.port;" | sudo tee -a $serverJS
     echo "" | sudo tee -a $serverJS
     echo "const server = {" | sudo tee -a $serverJS
     echo "    init() {" | sudo tee -a $serverJS
-    echo "        app.listen(port, () => console.log(\`Listening on port \${port}\!\`));" | sudo tee -a $serverJS
-    echo "        console.log(interfaces);" | sudo tee -a $serverJS
+    echo "        let addresses = [];" | sudo tee -a $serverJS
+    echo "        for (let i in interfaces) {" | sudo tee -a $serverJS
+    echo "            for (let i2 in interfaces[i]) {" | sudo tee -a $serverJS
+    echo "                let address = interfaces[i][i2];" | sudo tee -a $serverJS
+    echo "                if (address.family === 'IPv4' && !address.internal) {" | sudo tee -a $serverJS
+    echo "                    addresses.push(address.address);" | sudo tee -a $serverJS
+    echo "                }" | sudo tee -a $serverJS
+    echo "            }" | sudo tee -a $serverJS
+    echo "        }" | sudo tee -a $serverJS
+    echo "        app.listen(port, () => console.log(\`Listening at http://\${addresses}:\${port}\`));" | sudo tee -a $serverJS
     echo "    }" | sudo tee -a $serverJS
     echo "}" | sudo tee -a $serverJS
     echo "" | sudo tee -a $serverJS
@@ -217,12 +227,12 @@ function createServerJS() {
     echo "app.use(express.static(__dirname + '/public'));" | sudo tee -a $serverJS
 }
 
-function createPortJS() {
-    echo "NodeJS server DOES NOT file exists... creating basic NodeJS Express web server..."
-    sudo touch port.js
-    portJS='port.js'
-    echo "// This is the port used for the server to listen on. " | sudo tee -a $portJS
-    echo "return $1" | sudo tee -a $portJS
+function createConfigJS() {
+    echo "NodeJS server DOES NOT exists... creating basic NodeJS Express web server..."
+    sudo touch config.js
+    configJS='config.js'
+    echo "// Change the port and other configs of the NodeJS Express server here. " | sudo tee -a $configJS
+    echo "module.exports = { port: $1 };" | sudo tee -a $configJS
 }
 
 function createStartOnBoot() {
@@ -244,7 +254,8 @@ function createStartOnBoot() {
 }
 
 function startNodeServer() {
-    if (whiptail --yesno "The NodeJS Express server is setup. Would you like to start the server now?" 8 25 --title "Start Node Server?" 3>&1 1>&2 2>&3) then
+    if (whiptail --yesno "The NodeJS Express server is setup. \
+    \n\nWould you like to start the server now?" 15 25 --title "Start Node Server?" 3>&1 1>&2 2>&3) then
         # Yes
         cd
         cd
