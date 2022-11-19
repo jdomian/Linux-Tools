@@ -6,6 +6,10 @@ All Raspberry Pi Backups, Commands, Instructions for baasic installation of tool
 ```bash
 ssh <user>@<ip address>
 ```
+Example if your device had an IP address of 192.168.1.100 and the user name was "root".:
+```bash
+ssh root@192.168.1.100
+```
 2. Copy and paste the following into terminal to run and install my custom menu. (Cyberpunk themed whiptail menu... FTW...)
 ```bash
 curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/_install.sh --output _install.sh
