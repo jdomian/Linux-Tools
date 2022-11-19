@@ -1,8 +1,12 @@
 # Raspberry-Pi
-All Raspberry Pi Backups, Commands, Instructions for domian.network Servers
+All Raspberry Pi Backups, Commands, Instructions for baasic installation of tools I use.
 
 ## To Install tools:
-Copy and past the following into terminal to run and install whiptail menu.
+1. SSH into your Linux operating system with Terminal application on Windows, MacOS or Linux. (Replace the <ip address> with the IP Address the device/computer/machine is addigned to on your local network) 
+```bash
+ssh <user>@<ip address>
+```
+2. Copy and paste the following into terminal to run and install my custom menu. (Cyberpunk themed whiptail menu... FTW...)
 ```bash
 curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/_install.sh --output _install.sh
 chmod +x _install.sh
