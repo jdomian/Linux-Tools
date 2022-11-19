@@ -205,7 +205,7 @@ function createServerJS() {
     echo "const os = require('os');" | sudo tee -a $serverJS
     echo "const interfaces = os.networkInterfaces();" | sudo tee -a $serverJS
     echo "const serverIP = interfaces;" | sudo tee -a $serverJS
-    echo "const config = require('./config');" | sudo tee -a $serverJS
+    echo "const config = require('./server.config');" | sudo tee -a $serverJS
     echo "const port = config.port;" | sudo tee -a $serverJS
     echo "" | sudo tee -a $serverJS
     echo "const server = {" | sudo tee -a $serverJS
@@ -219,7 +219,17 @@ function createServerJS() {
     echo "                }" | sudo tee -a $serverJS
     echo "            }" | sudo tee -a $serverJS
     echo "        }" | sudo tee -a $serverJS
-    echo "        app.listen(port, () => console.log(\`Listening at http://\${addresses}:\${port}\`));" | sudo tee -a $serverJS
+    echo "        app.listen(port, () => {" | sudo tee -a $serverJS
+    echo "                console.log(\`NodeJS Express Server Started!\`);" | sudo tee -a $serverJS
+    echo "                console.log(\`Open a browser and go to http://\${addresses}:\${port} to access the main page.\`);" | sudo tee -a $serverJS
+    echo "                console.log(\`Files for this server are located at on this device at \${__dirname}.\`);" | sudo tee -a $serverJS
+    echo "                console.log(\`Press Ctrl+C to kill the server.\`);" | sudo tee -a $serverJS
+    echo "            }" | sudo tee -a $serverJS
+    echo "        );" | sudo tee -a $serverJS
+    echo "        app.get('/test', (req, res) => {" | sudo tee -a $serverJS
+    echo "            res.send(\`Test request made from \${req.ip}.\`);" | sudo tee -a $serverJS
+    echo "            console.log(\`Test request made from \${req.ip}.\`);" | sudo tee -a $serverJS
+    echo "        });" | sudo tee -a $serverJS
     echo "    }" | sudo tee -a $serverJS
     echo "}" | sudo tee -a $serverJS
     echo "" | sudo tee -a $serverJS
@@ -229,8 +239,8 @@ function createServerJS() {
 
 function createConfigJS() {
     echo "NodeJS server DOES NOT exists... creating basic NodeJS Express web server..."
-    sudo touch config.js
-    configJS='config.js'
+    sudo touch server.config.js
+    configJS='server.config.js'
     echo "// Change the port and other configs of the NodeJS Express server here. " | sudo tee -a $configJS
     echo "module.exports = { port: $1 };" | sudo tee -a $configJS
 }
