@@ -45,7 +45,8 @@ function nodeOptions() {
         "2" "Start On Boot: $STARTONBOOT"  \
         "3" "Go Back"  \
         "4" "Quit" \
-        "5" "INSTALL WITH THESE OPTIONS" 3>&2 2>&1 1>&3
+        "5" "INSTALL WITH THESE OPTIONS" \
+        "6" "Delete the existing node-server install" 3>&2 2>&1 1>&3
     )
 
     exitstatus=$?
@@ -60,6 +61,8 @@ function nodeOptions() {
             exit
         elif [ $NODEOPTIONS = 5 ]; then
             install $PORT $STARTONBOOT
+        elif [ $NODEOPTIONS = 6 ]; then
+            sudo rm -rf node-server
         else 
             echo "Your chosen option:" $OPTION
         fi
@@ -136,7 +139,7 @@ function install() {
     cd $nodeServerFolder
     webRootDir='public'
     if [ -d "$webRootDir" ]; then
-        echo "NodeJS web root directory 'public' exists... skipping"
+        echo -e "$green_prefix"NodeJS web root directory \'public\' exists... skipping"$all_suffix"
         cd $webRootDir
     else
         echo "NodeJS web root directory 'public' DOES NOT exists... creating..."
@@ -159,6 +162,8 @@ function install() {
         echo "index.html DOES NOT exists... creating..."
         echo index.html
         indexHTML = 'index.html'
+        echo -e "$green_prefix"Writing index.html file for you... so you don\'t have to..."$all_suffix"
+        sleep 1
         echo '<!DOCTYPE html>' | sudo tee -a $indexHTML
         echo '<html lang="en">' | sudo tee -a $indexHTML
         echo '  <head>' | sudo tee -a $indexHTML
@@ -196,6 +201,8 @@ function install() {
 }
 
 function createServerJS() {
+    echo -e "$green_prefix"Creating the server for you..."$all_suffix"
+    sleep 1
     echo "NodeJS server DOES NOT file exists... creating basic NodeJS Express web server..."
     sudo touch server.js
     serverJS='server.js'
@@ -239,6 +246,8 @@ function createServerJS() {
 
 function createConfigJS() {
     echo "NodeJS server DOES NOT exists... creating basic NodeJS Express web server..."
+    echo -e "$green_prefix"Setting up server configuration..."$all_suffix"
+    sleep 1
     sudo touch server.config.js
     configJS='server.config.js'
     echo "// Change the port and other configs of the NodeJS Express server here. " | sudo tee -a $configJS
@@ -248,19 +257,19 @@ function createConfigJS() {
 function createStartOnBoot() {
     # Add command to .bash_profile to start node server.js on boot.
     bashProfile='.bash_profile'
-    if [ -f "$bashProfile" ]; then
+    if [ -d "$bashProfile" ]; then
         echo "$bashProfile exists."
         echo "Backing up existing $bashProfile"
         sudo cp .bash_profile .bash_profile.old
-        echo "# Start NodeJS Web Server on boot" >> $bashProfile
-        echo 'node ~/node-server/server.js < /dev/null &' >> $bashProfile
+        
     else 
         echo "$bashProfile does not exist."
-        echo > .bash_profile
-        bashProfile='.bash_profile'
-        echo "# Start NodeJS Web Server on boot" >> $bashProfile
-        echo 'node ~/node-server/server.js < /dev/null &' >> $bashProfile
+        echo -e "$green_prefix"Creating startup .bash_profile..."$all_suffix"
     fi
+    sudo touch .bash_profile
+    echo "source ./_commands.sh" >> $bashProfile
+    echo "# Start NodeJS Web Server on boot" >> $bashProfile
+    echo 'node ~/node-server/server.js < /dev/null &' >> $bashProfile
 }
 
 function startNodeServer() {
@@ -271,12 +280,14 @@ function startNodeServer() {
         cd
         cd node-server
         node server.js
+        echo -e "$green_prefix"Starting Node Server..."$all_suffix"
+        sleep 1
     else
         # No
         echo "Skipping file..."
     fi
 
-    echo "Node Server started. Open a browser and go to: $(hostname -I):$1"
+    echo "$green_bold_prefix"Node Server started. Open a browser and go to: $(hostname -I):$1"$all_suffix"
     echo "To edit html, css and js files, go to $USER/node-server/."
 }
 
