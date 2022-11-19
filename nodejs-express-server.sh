@@ -119,11 +119,11 @@ function install() {
     fi
 
     # Create port.js file for express web server
-    portJS='port.js'
-    if [ -f "$portJS" ]; then
-        if (whiptail --yesno "There is a file that already exist as port.js. This will change the port to $1. Do you want to change the port?" 8 25 --title "port.js DETECTED!" 3>&1 1>&2 2>&3) then
+    configJS='server.config.js'
+    if [ -f "$configJS" ]; then
+        if (whiptail --yesno "There is a file that already exist as server.config.js. This will change the server port to $1 and could effect other things. Do you want to make these changes?" 8 25 --title "server.config.js DETECTED!" 3>&1 1>&2 2>&3) then
             # Yes
-            rm port.js
+            rm server.config.js
             createConfigJS $1
         else
             echo "Skipping port change..."
