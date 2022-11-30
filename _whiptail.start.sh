@@ -84,8 +84,11 @@ whiptail --title "_start::Netrunner::Interface -- (jdomian)" \
 	"6" "MFSB (Rivalburn/v2)" \
     	"7" "Map a Windows (SMB) Drive to Linux" \
     	"8" "Turing Pi 2 Admin" \
-    	"9" "Reboot" \
-	"10" "Quit"  3>&2 2>&1 1>&3	
+	"" "" \
+	"" "" \
+	"98" "Shutdown" \
+	"99" "Reboot" \
+	"100" "Quit"  3>&2 2>&1 1>&3	
 )
 
 exitstatus=$?
@@ -109,6 +112,38 @@ if [ $exitstatus = 0 ]; then
     elif [ $OPTION = 9 ]; then
         execInstall
     elif [ $OPTION = 10 ]; then
+        execInstall
+    elif [ $OPTION = 11 ]; then
+        execInstall
+    elif [ $OPTION = 12 ]; then
+        execInstall
+    elif [ $OPTION = 13 ]; then
+        execInstall
+    elif [ $OPTION = 14 ]; then
+        execInstall
+    elif [ $OPTION = 15 ]; then
+        execInstall
+    elif [ $OPTION = 16 ]; then
+        execInstall
+    elif [ $OPTION = 17 ]; then
+        execInstall
+    elif [ $OPTION = 18 ]; then
+        execInstall
+    elif [ $OPTION = 19 ]; then
+        execInstall
+    elif [ $OPTION = 97 ]; then
+    	echo "Rebooting..."
+    	sleep 2
+        sudo reboot
+    elif [ $OPTION = 98 ]; then
+    	echo "$yellow_bold_prefix"Shutdown will occur in 1 minute..."$all_suffix"
+        sudo shutdown
+    elif [ $OPTION = 99 ]; then
+    	echo "$yellow_bold_prefix"Forceful shutdown..."$all_suffix"
+    	sleep 2
+	echo "$red_bold_prefix"...NOW!"$all_suffix"
+        sudo shutdown -h now
+    elif [ $OPTION = 100 ]; then
         execInstall
     else 
         echo "Your chosen option:" $OPTION
