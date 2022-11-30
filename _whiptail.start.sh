@@ -85,9 +85,10 @@ whiptail --title "_start::Netrunner::Interface -- (jdomian)" \
     	"7" "Map a Windows (SMB) Drive to Linux" \
     	"8" "Turing Pi 2 Admin" \
 	"" "" \
-	"" "" \
+	"96" "Pair Bluetooth Device" \
+	"97" "Reboot" \
 	"98" "Shutdown" \
-	"99" "Reboot" \
+	"99" "FORCE Shutdown" \
 	"100" "Quit"  3>&2 2>&1 1>&3	
 )
 
@@ -131,6 +132,8 @@ if [ $exitstatus = 0 ]; then
         execInstall
     elif [ $OPTION = 19 ]; then
         execInstall
+    elif [ $OPTION = 96 ]; then
+        execInstall pair-bluetooth-device.sh
     elif [ $OPTION = 97 ]; then
     	echo "Rebooting..."
     	sleep 2
