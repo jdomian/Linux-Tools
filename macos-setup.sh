@@ -9,7 +9,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-cd
 echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/jonathan.domian/.zprofile
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/jonathan.domian/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
