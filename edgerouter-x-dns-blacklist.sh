@@ -1,3 +1,5 @@
+#!/bin/bash
+
 configure
 set system package repository blacklist components main
 set system package repository blacklist description 'Britannic blacklist debian stretch repository'
