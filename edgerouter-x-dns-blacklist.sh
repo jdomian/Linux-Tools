@@ -1,4 +1,8 @@
 #!/bin/bash
+# Run these lines in the SSH'd terminal of the device.
+# curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/edgerouter-x-dns-blacklist.sh --output edgerouter-x-dns-blacklist.sh
+# chmod +x edgerouter-x-dns-blacklist.sh
+# sudo ./edgerouter-x-dns-blacklist.sh
 
 configure
 set system package repository blacklist components main
