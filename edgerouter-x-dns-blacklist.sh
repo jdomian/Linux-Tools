@@ -4,7 +4,7 @@
 # chmod +x edgerouter-x-dns-blacklist.sh
 # sudo ./edgerouter-x-dns-blacklist.sh
 
-./configure
+configure
 set system package repository blacklist components main
 set system package repository blacklist description 'Britannic blacklist debian stretch repository'
 set system package repository blacklist distribution stretch
