@@ -15,10 +15,10 @@ sudo curl -L https://raw.githubusercontent.com/britannic/debian-repo/master/blac
 
 sudo apt-get update && sudo apt-get install -f edgeos-dnsmasq-blacklist
 
-apt --fix-broken install
+sudo apt --fix-broken install
 
 sudo apt-get clean cache
-delete system image
+sudo delete system image
 
 curl -L -O https://raw.githubusercontent.com/britannic/blacklist/master/edgeos-dnsmasq-blacklist_1.2.4.7_mipsel.deb
 sudo dpkg -i edgeos-dnsmasq-blacklist_1.2.4.7_mipsel.deb
