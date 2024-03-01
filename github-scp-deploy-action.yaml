@@ -1,0 +1,83 @@
+# This is a sample .yaml file to be added a repo's /.github/workflows/ folder.
+# This file is accessible under the "Actions" in the repo and set as a "New Workflow".
+# This action runs as a "docker container. Each of the "steps" appear in the "Workflow" of the action set in the "Actions" tab in Github.
+name: Github SCP Deploy Action
+on:
+  push:
+    branches:
+      # Which branch you want to deploy.
+      - main
+jobs:
+  deploy:
+    # Docker base OS to use for the container.
+    runs-on: ubuntu-latest
+    steps:
+    # Action to "Checkout" the repository. This adds all contents of the repo to the /root directory of the Docker container so we can push files using SCP.
+    - name: Check out repository
+      uses: actions/checkout@v2
+    # Visual verification of that the ".pem" key or is accessible by the action. This is added as a "Repository secret" in the Github UI under: <Repository> -> "Settings" -> "Secrets and variables" -> "Actions" -> "Repository secrets".
+    # Create a "New repository secret" and paste your ".pem" file contents into the new "secret".
+    - name: Verify SSH Private Key
+      env:
+          # References the "Repository secret" by its name in Github's UI under "Actions secrets and variables" -> "Repository secrets".
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        echo "SSH Private Key is:" && 
+        echo $SSH_PRIVATE_KEY
+    # Step to create a "temporary" ~/.ssh directory to store or temporary .pem key.
+    - name: Create ~/.ssh directory
+      run: |
+        # Change to the home directory.
+        cd ~ &&
+        # Create the .ssh directory
+        sudo mkdir -p ~/.ssh &&
+        # DEBUG: Display the path of the current directory.
+        echo "Current directory is: " $(pwd) &&
+        # DEBUG: List the files in the directoy.
+        sudo ls -la
+    # Step to create a "temporary" .pem key file called "id_rsa.key" from contents of our "Repository secret" named "SSH_PRIVATE_KEY" to use for SCP file transfer.
+    - name: Create SSH Private Key file id_rsa.key
+      run: |
+        # Create the temporary id_rsa.key file using 'touch'.
+        sudo touch ~/.ssh/id_rsa.key &&
+        # Change to the home directory.
+        cd ~ &&
+        # Change to ~/.ssh directory inside home directory.
+        cd .ssh &&
+        # DEBUG: Display the path of the current directory.
+        echo "Current directory is: " $(pwd) &&
+        # DEBUG: List the files in the ~/.ssh directory.
+        sudo ls -la
+    # Step to write the contents of our "Repository secret" named "SSH_PRIVATE_KEY" to our temporary key file called "id_rsa.key".
+    - name: Write SSH Private Key to id_rsa.key file
+      run: |
+        # Write the SSH private key from "Repository secrets" to the temporary id_rsa.key file.
+        echo -e "${{ secrets.SSH_PRIVATE_KEY }}" | sudo tee ~/.ssh/id_rsa.key > /dev/null &&
+        # Change to home directory
+        cd ~ &&
+        # Change to ~/.ssh directory inside home directory.
+        cd .ssh &&
+        # DEBUG: Display the path of the current directory.
+        echo "Current directory is: " $(pwd) &&
+        # DEBUG: List the files in the ~/.ssh directory to verify "id_rsa.key" was created.
+        sudo ls -la &&
+        # DEBUG: Display the new contents of the id_rsa.key file. (It will be encrypted, but should be multiple lines of asterisks if correct.)
+        sudo cat ~/.ssh/id_rsa.key
+    # Step to change permission of the temporary id_rsa.key so SCP can use it.
+    - name: Set permissions for SSH private key
+      run: |
+        # Set the permissions for the id_rsa.key file to 600.
+        sudo chmod 600 /home/runner/.ssh/id_rsa.key
+        # Change to the home directory.
+        cd ~ &&
+        # Change to ~/.ssh directory inside home directory.
+        cd .ssh &&
+        # DEBUG: Display the path of the current directory.
+        echo "Current directory is: " $(pwd) &&
+        # DEBUG: List the files in the ~/.ssh directory.
+        sudo ls -la
+    # Final step to connect to the server/instance using SCP and the id_rsa.key file to transfer our files.
+    - name: Connect to server/instance via SCP.
+      run: |
+        # SCP into server/instance. Before doing this, the directory on the server/instances needs to have permissions set for ```sudo chown -R <myUser>:<myUserGroup> /path/to/server/directory/```
+        sudo scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.key /path/of/repo/directory/or/file.md serverUsername@<serverIPAddress>:/path/of/server/directory/
