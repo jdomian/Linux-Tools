@@ -73,7 +73,7 @@ jobs:
     # Step to change permission of the temporary id_rsa.key so SCP can use it.
     - name: Set permissions for SSH private key
       run: |
-        # Set the permissions for the id_rsa.key file to 600.
+        # Set the permissions for the id_rsa.key file to 600 or "-rw-------".
         sudo chmod 600 /home/runner/.ssh/id_rsa.key
         # DEBUG: Change to the home directory.
         cd ~ &&
@@ -82,7 +82,7 @@ jobs:
         # DEBUG: Display the path of the current directory.
         echo "Current directory is: " $(pwd) &&
         # DEBUG: List the files in the ~/.ssh directory.
-        echo "Directory contents of " $(pwd) ": " &&
+        echo "Directory contents of" $(pwd)": " &&
         sudo ls -la
     # Final step to connect to the server/instance using SCP and the id_rsa.key file to transfer our files.
     - name: Connect to server/instance via SCP.
