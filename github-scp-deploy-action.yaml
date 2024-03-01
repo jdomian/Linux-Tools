@@ -25,7 +25,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       run: |
         # DEBUG: Displays the contents of our "Repository secret" named "SSH_PRIVATE_KEY". The values will be encrypted and display as a series of "***".
-        echo "SSH Private Key is:" && 
+        echo "SSH Private Key is: " && 
         echo $SSH_PRIVATE_KEY
     # Step to create a "temporary" ~/.ssh directory to store a temporary .pem key file.
     - name: Create ~/.ssh directory
@@ -37,6 +37,7 @@ jobs:
         # DEBUG: Display the path of the current directory.
         echo "Current directory is: " $(pwd) &&
         # DEBUG: List the files in the directoy.
+        echo "Directory contents of " $(pwd) ": " &&
         sudo ls -la
     # Step to create a "temporary" .pem key file called "id_rsa.key" from contents of our "Repository secret" named "SSH_PRIVATE_KEY" to use for SCP file transfer.
     - name: Create SSH Private Key file id_rsa.key
@@ -50,6 +51,7 @@ jobs:
         # DEBUG: Display the path of the current directory.
         echo "Current directory is: " $(pwd) &&
         # DEBUG: List the files in the ~/.ssh directory.
+        echo "Directory contents of " $(pwd) ": " &&
         sudo ls -la
     # Step to write the contents of our "Repository secret" named "SSH_PRIVATE_KEY" to our temporary key file called "id_rsa.key".
     - name: Write SSH Private Key to id_rsa.key file
@@ -63,8 +65,10 @@ jobs:
         # DEBUG: Display the path of the current directory.
         echo "Current directory is: " $(pwd) &&
         # DEBUG: List the files in the ~/.ssh directory to verify "id_rsa.key" was created.
+        echo "Directory contents of " $(pwd) ": " &&
         sudo ls -la &&
         # DEBUG: Display the new contents of the id_rsa.key file. (It will be encrypted, but should be multiple lines of asterisks if correct.)
+        echo "Contents of ~/.ssh/id_rsa.key: " &&
         sudo cat ~/.ssh/id_rsa.key
     # Step to change permission of the temporary id_rsa.key so SCP can use it.
     - name: Set permissions for SSH private key
@@ -78,6 +82,7 @@ jobs:
         # DEBUG: Display the path of the current directory.
         echo "Current directory is: " $(pwd) &&
         # DEBUG: List the files in the ~/.ssh directory.
+        echo "Directory contents of " $(pwd) ": " &&
         sudo ls -la
     # Final step to connect to the server/instance using SCP and the id_rsa.key file to transfer our files.
     - name: Connect to server/instance via SCP.
