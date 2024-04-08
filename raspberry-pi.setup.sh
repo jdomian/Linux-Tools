@@ -22,7 +22,7 @@ select stuff in "${initSetup[@]}"; do
         "MFSB")
             echo "green_bold_prefix"Mutha F*****\' Space Blaster!"all_suffix"
             echo "This is the OG MFSB v2 attachment for the Rivalburn."
-            curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/mfsb.setup.sh --output mfsb.setup.sh
+            curl https://raw.githubusercontent.com/jdomian/Linux-Tools/main/mfsb.setup.sh --output mfsb.setup.sh
             chmod +x mfsb.setup.sh
             sudo ./mfsb.setup.sh
             break
@@ -30,7 +30,7 @@ select stuff in "${initSetup[@]}"; do
         "MFSB-Hyperpixel2r")
             echo "green_bold_prefix"Mutha F*****\' Space Blaster -- HYPERPIXEL 2.1 Round!"all_suffix"
             echo "This is the v3 of the MFSB attachment, designed for all blaster with picatinny rails and a round touchscreen display with custom operating system."
-            curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/mfsb-hyperpixel2r.setup.sh --output mfsb-hyperpixel2r.setup.sh
+            curl https://raw.githubusercontent.com/jdomian/Linux-Tools/main/mfsb-hyperpixel2r.setup.sh --output mfsb-hyperpixel2r.setup.sh
             chmod +x mfsb-hyperpixel2r.setup.sh
             sudo ./mfsb-hyperpixel2r.setup.sh
             break
@@ -38,7 +38,7 @@ select stuff in "${initSetup[@]}"; do
         "Kiosk Mode (Includes NodeJS Express Web Server)")
             echo "green_bold_prefix"NodeJS Basic Web Server"all_suffix"
             echo "Headless web server for all your hosting needs! Super handy for quick stuff."
-            curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/node-server.setup.sh --output mfsb-hyperpixel2r.setup.sh
+            curl https://raw.githubusercontent.com/jdomian/Linux-Tools/main/node-server.setup.sh --output mfsb-hyperpixel2r.setup.sh
             chmod +x mfsb-hyperpixel2r.setup.sh
             sudo ./mfsb-hyperpixel2r.setup.sh
             break
