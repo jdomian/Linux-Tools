@@ -9,7 +9,7 @@
 # OR
 #
 # Run these lines in the SSH'd terminal of the device.
-# curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/_install.sh --output _install.sh
+# curl https://raw.githubusercontent.com/jdomian/Linux-Tools/main/_install.sh --output _install.sh
 # chmod +x _install.sh
 # sudo ./_install.sh
 yellow_bold_prefix='\033[1;33m'
