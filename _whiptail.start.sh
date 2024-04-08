@@ -47,7 +47,7 @@ function execInstall() {
     fi
 
     # Download script form Github and execute in the users home directory.
-    sudo curl https://raw.githubusercontent.com/jdomian/Raspberry-Pi/main/$1 --output $1
+    sudo curl https://raw.githubusercontent.com/jdomian/Linux-Tools/main/$1 --output $1
     sudo chmod +x $1
     sudo ./$1
     sudo mv $1 $installationsFolder
