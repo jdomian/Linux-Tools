@@ -93,3 +93,35 @@ pair dc:2c:26:d4:f8:2b
 echo Pairing MX Master 3 (Bluetooth Input 3)
 pair c1:6c:7e:13:63:d5
 ```
+## Waveshare WM8960 on RPi0 2w
+Run the following
+1. Install Legacy 64-Bit Lite OS on SD Card
+2. Insert SD Card and wait for boot
+3. Update, Upgrade and install Git
+```bash
+sudo apt-get upgrade && sudo apt-get update -y && sudo apt-get install git -y
+```   
+4. Install Waveshare drivers. Can use (this)[https://www.waveshare.com/wiki/WM8960_Audio_HAT#202302_System.2C_Driver_Loading] as a reference 
+```bash
+git clone https://github.com/Sybility/WM8960-Audio-HAT.git
+cd WM8960-Audio-HAT
+sudo ./install.sh
+```
+5. Reboot after Waveshare drivers are installed
+6. Enter raspi-config and do the following... System options ; Audio ; and then choose the wm8960soundcard. Then exit.
+7. Run the following command
+```bash
+sudo alsactl --file=/etc/wm8960-soundcard/wm8960_asound.state  store
+```
+8. Install an mp3 player to test
+```bash
+sudo apt-get install mpg123
+```
+9. Download and test and MP3 file
+```bash
+wget https://file-examples.com/storage/fe9f6f893066954d9aac3a2/2017/11/file_example_MP3_700KB.mp3
+```
+10. Test the MP3 file
+```bash
+sudo mpg123 file_example_MP3_700KB.mp3
+```
