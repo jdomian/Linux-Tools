@@ -109,16 +109,11 @@ sudo ./install.sh
 sudo reboot
 ```
 5. Reboot after Waveshare drivers are installed
-6. Enter raspi-config and do the following... System options ; Audio ; and then choose the wm8960soundcard. Then exit.
-7. Run the following command
-```bash
-sudo alsactl --file=/etc/wm8960-soundcard/wm8960_asound.state  store
-```
-8. Download and test and MP3 file
+6. Download and test and MP3 file
 ```bash
 wget https://file-examples.com/storage/fe9f6f893066954d9aac3a2/2017/11/file_example_MP3_700KB.mp3
 ```
-9. Test the MP3 file
+7. Test the MP3 file
 ```bash
 sudo mpg123 file_example_MP3_700KB.mp3
 ```
