@@ -99,7 +99,7 @@ Run the following
 2. Insert SD Card and wait for boot
 3. Update, Upgrade and install Git
 ```bash
-sudo apt-get upgrade && sudo apt-get update -y && sudo apt-get install git -y
+sudo apt-get upgrade && sudo apt-get update -y && sudo apt-get install git mpg123 -y
 ```   
 4. Install Waveshare drivers. Can use (this)[https://www.waveshare.com/wiki/WM8960_Audio_HAT#202302_System.2C_Driver_Loading] as a reference 
 ```bash
@@ -114,15 +114,11 @@ sudo reboot
 ```bash
 sudo alsactl --file=/etc/wm8960-soundcard/wm8960_asound.state  store
 ```
-8. Install an mp3 player to test
-```bash
-sudo apt-get install mpg123
-```
-9. Download and test and MP3 file
+8. Download and test and MP3 file
 ```bash
 wget https://file-examples.com/storage/fe9f6f893066954d9aac3a2/2017/11/file_example_MP3_700KB.mp3
 ```
-10. Test the MP3 file
+9. Test the MP3 file
 ```bash
 sudo mpg123 file_example_MP3_700KB.mp3
 ```
