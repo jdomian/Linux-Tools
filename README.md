@@ -106,6 +106,7 @@ sudo apt-get upgrade && sudo apt-get update -y && sudo apt-get install git -y
 git clone https://github.com/Sybility/WM8960-Audio-HAT.git
 cd WM8960-Audio-HAT
 sudo ./install.sh
+sudo reboot
 ```
 5. Reboot after Waveshare drivers are installed
 6. Enter raspi-config and do the following... System options ; Audio ; and then choose the wm8960soundcard. Then exit.
